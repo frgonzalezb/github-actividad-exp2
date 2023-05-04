@@ -1,3 +1,4 @@
+from django.shortcuts import render, redirect, get_object_or_404
 from .models import Persona
 from django.shortcuts import render, redirect
 
@@ -27,3 +28,8 @@ def persona_create(request):
         form = PersonaCreate()
 
     return render(request, "personas/create.html", {"form": form})
+def eliminar_personas(request, pk):
+    persona = get_object_or_404(Persona, pk=pk)
+    if request.method == 'POST':
+        persona.delete()
+        return redirect('listado_personas')
