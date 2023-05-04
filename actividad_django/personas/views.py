@@ -33,3 +33,15 @@ def eliminar_personas(request, pk):
     if request.method == 'POST':
         persona.delete()
         return redirect('listado_personas')
+
+
+def editar_persona(request, pk):
+    persona = get_object_or_404(Persona, pk=pk)
+    if request.method == 'POST':
+        form = PersonaCreate(request.POST, instance=persona)
+        if form.is_valid():
+            form.save()
+            return redirect('listado_personas')
+    else:
+        form = PersonaCreate(instance=persona)
+    return render(request, 'personas/editar_persona.html', {'form': form})
