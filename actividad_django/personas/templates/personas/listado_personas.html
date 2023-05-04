@@ -23,6 +23,7 @@
                     <td>{{ persona.nombre }}</td>
                     <td>{{ persona.apellido }}</td>
                     <td>
+                        <a href="{% url 'editar_persona' persona.pk %}">Editar</a>
                         <form method="POST" action="{% url 'eliminar_persona' persona.pk %}">
                             {% csrf_token %}
                             <button type="submit">Eliminar</button>
