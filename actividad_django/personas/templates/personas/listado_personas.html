@@ -1,33 +1,38 @@
 {% extends 'personas/base.html' %}
 
 {% block content %}
-<h1>Lista de personas</h1>
-<table>
-    <thead>
-        <tr>
-            <th>Rut</th>
-            <th>Nombre</th>
-            <th>Apellido</th>
-        </tr>
-    </thead>
-    <tbody>
-        {% for persona in personas %}
-            <tr>
-                <td>{{ persona.rut }}</td>
-                <td>{{ persona.nombre }}</td>
-                <td>{{ persona.apellido }}</td>
-                <td>
-                    <a href="{% url 'editar_persona' persona.pk %}">Editar</a>
-                    <form method="POST" action="{% url 'eliminar_persona' persona.pk %}">
-                        {% csrf_token %}
-                        <button type="submit">Eliminar</button>
-                    </form>
-                </td>
-            </tr>
-        {% endfor %}
-    </tbody>
-</table>
+<div class="container">
 
-<a href="{% url 'create' %}">Crea persona</a>
+    <h1>Lista de personas</h1>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Rut</th>
+                <th>Nombre</th>
+                <th>Apellido</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for persona in personas %}
+                <tr>
+                    <td>{{ persona.rut }}</td>
+                    <td>{{ persona.nombre }}</td>
+                    <td>{{ persona.apellido }}</td>
+                    <td class="d-flex">
+                        <a href="{% url 'editar_persona' persona.pk %}" class="btn btn-info" >Editar</a>
+                        <form method="POST" action="{% url 'eliminar_persona' persona.pk %}">
+                            {% csrf_token %}
+                            <button type="submit" class="btn btn-danger mx-2">Eliminar</button>
+                        </form>
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+<div class="container">
+    <a href="{% url 'create' %}" class="btn btn-primary">Crea persona</a>
+</div>
+
 {% endblock %} 
     
